@@ -1,9 +1,7 @@
-use collection_macros::hashset;
-use std::{collections::HashSet, iter::Peekable, str::Chars};
+use std::{iter::Peekable, str::Chars};
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum Token {
-
     Let,
     Function,
     True,
@@ -13,7 +11,6 @@ pub enum Token {
     Return,
     Equal,
     NotEqual,
-
 
     Illegal,
     Assign,
@@ -47,7 +44,7 @@ static KEYWORDS: phf::Map<&'static str, Token> = phf::phf_map! {
 };
 
 #[derive(Debug)]
-struct Lexer<'a> {
+pub struct Lexer<'a> {
     pub chars: Peekable<Chars<'a>>,
 }
 
@@ -104,7 +101,6 @@ impl<'a> Iterator for Lexer<'a> {
 
                     if let Some((_, v)) = KEYWORDS.get_entry(&ident) {
                         return Some(v.clone());
-
                     }
                     return Some(Token::Identifier(ident));
                 }
