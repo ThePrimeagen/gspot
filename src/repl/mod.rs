@@ -1,0 +1,4 @@
+
+const PROMPT: &'static str = ">>";
+
+
